@@ -5,4 +5,3 @@ unsigned char PORT_A_DIR;
 unsigned char PORT_A_OUT;
 
 #endif
-

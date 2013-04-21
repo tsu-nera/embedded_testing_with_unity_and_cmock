@@ -42,6 +42,8 @@ all: clean default
 default:
 	ruby auto/generate_test_runner.rb test/TestMenacingLED.c build/TestMenacingLED_Runner.c
 	ruby auto/generate_test_runner.rb test/TestS5.c build/TestS5_Runner.c
+	ruby lib/cmock.rb src/S5Ctrl.h
+	ruby lib/cmock.rb src/Buttons.h
 	$(C_COMPILER) $(INC_DIRS) $(SYMBOLS) $(SRC_FILES) -o $(TARGET)
 	$(C_COMPILER) $(INC_DIRS) $(SYMBOLS) $(SRC_FILES2) -o $(TARGET2)
 	./$(TARGET)

@@ -15,6 +15,7 @@ typedef struct _CMOCK_S5Ctrl_Silence_CALL_INSTANCE
 typedef struct _CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE
 {
   UNITY_LINE_TYPE LineNumber;
+  int ReturnVal;
   int Expected_Frequency;
 
 } CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE;
@@ -71,7 +72,7 @@ void S5Ctrl_Silence_CMockExpect(UNITY_LINE_TYPE cmock_line)
   cmock_call_instance->LineNumber = cmock_line;
 }
 
-void S5Ctrl_SetFrequency(int Frequency)
+int S5Ctrl_SetFrequency(int Frequency)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE* cmock_call_instance = (CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.S5Ctrl_SetFrequency_CallInstance);
@@ -81,6 +82,7 @@ void S5Ctrl_SetFrequency(int Frequency)
   {
     UNITY_TEST_ASSERT_EQUAL_INT(cmock_call_instance->Expected_Frequency, Frequency, cmock_line, "Function 'S5Ctrl_SetFrequency' called with unexpected value for argument 'Frequency'.");
   }
+  return cmock_call_instance->ReturnVal;
 }
 
 void CMockExpectParameters_S5Ctrl_SetFrequency(CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE* cmock_call_instance, int Frequency)
@@ -88,7 +90,7 @@ void CMockExpectParameters_S5Ctrl_SetFrequency(CMOCK_S5Ctrl_SetFrequency_CALL_IN
   cmock_call_instance->Expected_Frequency = Frequency;
 }
 
-void S5Ctrl_SetFrequency_CMockExpect(UNITY_LINE_TYPE cmock_line, int Frequency)
+void S5Ctrl_SetFrequency_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, int Frequency, int cmock_to_return)
 {
   CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE));
   CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE* cmock_call_instance = (CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
@@ -96,6 +98,7 @@ void S5Ctrl_SetFrequency_CMockExpect(UNITY_LINE_TYPE cmock_line, int Frequency)
   Mock.S5Ctrl_SetFrequency_CallInstance = CMock_Guts_MemChain(Mock.S5Ctrl_SetFrequency_CallInstance, cmock_guts_index);
   cmock_call_instance->LineNumber = cmock_line;
   CMockExpectParameters_S5Ctrl_SetFrequency(cmock_call_instance, Frequency);
+  cmock_call_instance->ReturnVal = cmock_to_return;
 }
 
 void S5Ctrl_Loud(void)

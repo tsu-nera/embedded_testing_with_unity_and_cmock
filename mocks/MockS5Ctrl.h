@@ -13,8 +13,8 @@ void MockS5Ctrl_Verify(void);
 
 #define S5Ctrl_Silence_Expect() S5Ctrl_Silence_CMockExpect(__LINE__)
 void S5Ctrl_Silence_CMockExpect(UNITY_LINE_TYPE cmock_line);
-#define S5Ctrl_SetFrequency_Expect(Frequency) S5Ctrl_SetFrequency_CMockExpect(__LINE__, Frequency)
-void S5Ctrl_SetFrequency_CMockExpect(UNITY_LINE_TYPE cmock_line, int Frequency);
+#define S5Ctrl_SetFrequency_ExpectAndReturn(Frequency, cmock_retval) S5Ctrl_SetFrequency_CMockExpectAndReturn(__LINE__, Frequency, cmock_retval)
+void S5Ctrl_SetFrequency_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, int Frequency, int cmock_to_return);
 #define S5Ctrl_Loud_Expect() S5Ctrl_Loud_CMockExpect(__LINE__)
 void S5Ctrl_Loud_CMockExpect(UNITY_LINE_TYPE cmock_line);
 

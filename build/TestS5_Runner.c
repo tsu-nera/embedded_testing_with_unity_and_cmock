@@ -34,6 +34,7 @@ extern void setUp(void);
 extern void tearDown(void);
 extern void test_S5_Exec_ShouldBeSilentWhen0(void);
 extern void test_S5_Exec_ShouldBePainfullyLoudWhenSwHigh(void);
+extern void test_S5_Exec_ShouldBeSilentIfNotLoudEnough(void);
 
 
 //=======Mock Management=====
@@ -71,6 +72,7 @@ int main(void)
   UnityBegin();
   RUN_TEST(test_S5_Exec_ShouldBeSilentWhen0, 16);
   RUN_TEST(test_S5_Exec_ShouldBePainfullyLoudWhenSwHigh, 24);
+  RUN_TEST(test_S5_Exec_ShouldBeSilentIfNotLoudEnough, 33);
 
   return (UnityEnd());
 }

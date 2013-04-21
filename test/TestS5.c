@@ -24,8 +24,16 @@ void test_S5_Exec_ShouldBeSilentWhen0(void)
 void test_S5_Exec_ShouldBePainfullyLoudWhenSwHigh(void)
 {
   Buttons_CheckS5Switch_ExpectAndReturn(1);
-  S5Ctrl_SetFrequency_Expect(20000);
+  S5Ctrl_SetFrequency_ExpectAndReturn(20000, 20000);
   S5Ctrl_Loud_Expect();
 
+  S5_Exec();
+}
+
+void test_S5_Exec_ShouldBeSilentIfNotLoudEnough(void)
+{
+  Buttons_CheckS5Switch_ExpectAndReturn(1);
+  S5Ctrl_SetFrequency_ExpectAndReturn(20000, 14000);
+  S5Ctrl_Silence_Expect();
   S5_Exec();
 }

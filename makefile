@@ -1,12 +1,6 @@
-# ==========================================
-#   Unity Project - A Test Framework for C
-#   Copyright (c) 2007 Mike Karlesky, Mark VanderVoord, Greg Williams
-#   [Released under MIT License. Please refer to license.txt for details]
-# ========================================== 
-
 C_COMPILER=gcc
 TARGET_BASE = MenacingLED
-TARGET_BASE2 = TestS5
+TARGET_BASE2 = S5
 TARGET_EXTENSION=.exe
 TARGET = $(TARGET_BASE)$(TARGET_EXTENSION)
 TARGET2 = $(TARGET_BASE2)$(TARGET_EXTENSION)

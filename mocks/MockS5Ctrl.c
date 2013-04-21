@@ -12,9 +12,24 @@ typedef struct _CMOCK_S5Ctrl_Silence_CALL_INSTANCE
 
 } CMOCK_S5Ctrl_Silence_CALL_INSTANCE;
 
+typedef struct _CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+  int Expected_Frequency;
+
+} CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE;
+
+typedef struct _CMOCK_S5Ctrl_Loud_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+
+} CMOCK_S5Ctrl_Loud_CALL_INSTANCE;
+
 static struct MockS5CtrlInstance
 {
   CMOCK_MEM_INDEX_TYPE S5Ctrl_Silence_CallInstance;
+  CMOCK_MEM_INDEX_TYPE S5Ctrl_SetFrequency_CallInstance;
+  CMOCK_MEM_INDEX_TYPE S5Ctrl_Loud_CallInstance;
 } Mock;
 
 extern jmp_buf AbortFrame;
@@ -23,6 +38,8 @@ void MockS5Ctrl_Verify(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   UNITY_TEST_ASSERT(CMOCK_GUTS_NONE == Mock.S5Ctrl_Silence_CallInstance, cmock_line, "Function 'S5Ctrl_Silence' called less times than expected.");
+  UNITY_TEST_ASSERT(CMOCK_GUTS_NONE == Mock.S5Ctrl_SetFrequency_CallInstance, cmock_line, "Function 'S5Ctrl_SetFrequency' called less times than expected.");
+  UNITY_TEST_ASSERT(CMOCK_GUTS_NONE == Mock.S5Ctrl_Loud_CallInstance, cmock_line, "Function 'S5Ctrl_Loud' called less times than expected.");
 }
 
 void MockS5Ctrl_Init(void)
@@ -51,6 +68,51 @@ void S5Ctrl_Silence_CMockExpect(UNITY_LINE_TYPE cmock_line)
   CMOCK_S5Ctrl_Silence_CALL_INSTANCE* cmock_call_instance = (CMOCK_S5Ctrl_Silence_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, "CMock has run out of memory. Please allocate more.");
   Mock.S5Ctrl_Silence_CallInstance = CMock_Guts_MemChain(Mock.S5Ctrl_Silence_CallInstance, cmock_guts_index);
+  cmock_call_instance->LineNumber = cmock_line;
+}
+
+void S5Ctrl_SetFrequency(int Frequency)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE* cmock_call_instance = (CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.S5Ctrl_SetFrequency_CallInstance);
+  Mock.S5Ctrl_SetFrequency_CallInstance = CMock_Guts_MemNext(Mock.S5Ctrl_SetFrequency_CallInstance);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, "Function 'S5Ctrl_SetFrequency' called more times than expected.");
+  cmock_line = cmock_call_instance->LineNumber;
+  {
+    UNITY_TEST_ASSERT_EQUAL_INT(cmock_call_instance->Expected_Frequency, Frequency, cmock_line, "Function 'S5Ctrl_SetFrequency' called with unexpected value for argument 'Frequency'.");
+  }
+}
+
+void CMockExpectParameters_S5Ctrl_SetFrequency(CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE* cmock_call_instance, int Frequency)
+{
+  cmock_call_instance->Expected_Frequency = Frequency;
+}
+
+void S5Ctrl_SetFrequency_CMockExpect(UNITY_LINE_TYPE cmock_line, int Frequency)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE));
+  CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE* cmock_call_instance = (CMOCK_S5Ctrl_SetFrequency_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, "CMock has run out of memory. Please allocate more.");
+  Mock.S5Ctrl_SetFrequency_CallInstance = CMock_Guts_MemChain(Mock.S5Ctrl_SetFrequency_CallInstance, cmock_guts_index);
+  cmock_call_instance->LineNumber = cmock_line;
+  CMockExpectParameters_S5Ctrl_SetFrequency(cmock_call_instance, Frequency);
+}
+
+void S5Ctrl_Loud(void)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_S5Ctrl_Loud_CALL_INSTANCE* cmock_call_instance = (CMOCK_S5Ctrl_Loud_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.S5Ctrl_Loud_CallInstance);
+  Mock.S5Ctrl_Loud_CallInstance = CMock_Guts_MemNext(Mock.S5Ctrl_Loud_CallInstance);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, "Function 'S5Ctrl_Loud' called more times than expected.");
+  cmock_line = cmock_call_instance->LineNumber;
+}
+
+void S5Ctrl_Loud_CMockExpect(UNITY_LINE_TYPE cmock_line)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_S5Ctrl_Loud_CALL_INSTANCE));
+  CMOCK_S5Ctrl_Loud_CALL_INSTANCE* cmock_call_instance = (CMOCK_S5Ctrl_Loud_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, "CMock has run out of memory. Please allocate more.");
+  Mock.S5Ctrl_Loud_CallInstance = CMock_Guts_MemChain(Mock.S5Ctrl_Loud_CallInstance, cmock_guts_index);
   cmock_call_instance->LineNumber = cmock_line;
 }
 

@@ -21,3 +21,11 @@ void test_S5_Exec_ShouldBeSilentWhen0(void)
   S5_Exec();
 }
 
+void test_S5_Exec_ShouldBePainfullyLoudWhenSwHigh(void)
+{
+  Buttons_CheckS5Switch_ExpectAndReturn(1);
+  S5Ctrl_SetFrequency_Expect(20000);
+  S5Ctrl_Loud_Expect();
+
+  S5_Exec();
+}

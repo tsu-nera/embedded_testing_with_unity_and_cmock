@@ -26,6 +26,7 @@
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
+extern void test_MakeSureLedTurnsOnMenacingly(void);
 
 
 //=======Test Reset Option=====
@@ -41,6 +42,7 @@ int main(void)
 {
   Unity.TestFile = "test/TestMenacingLED.c";
   UnityBegin();
+  RUN_TEST(test_MakeSureLedTurnsOnMenacingly, 12);
 
   return (UnityEnd());
 }
